@@ -14,10 +14,10 @@ run-clickstream-job:
 	docker exec jobmanager ./bin/flink run --python ./code/flink_orchestration.py
 
 up-stream-only:
-	docker-compose up -d zookeeper broker data-source 
+	docker-compose up -d zookeeper broker postgres data-source
 
 run-stream-only:
-	docker-compose exec data-source python /app/data_stream.py
+	docker-compose exec data-source python /app/src/data_stream.py
 
 make kafka-control-center:
 	docker compose up control-center -d

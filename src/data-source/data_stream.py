@@ -1,5 +1,6 @@
 from pandas import read_csv
 from constants import clickstream_data_path, clickstream_data_headers, kafka_topic_name, kafka_broker_url
+from users_init import users_init
 from numpy import array
 from numpy.random import choice
 from kafka import KafkaProducer
@@ -7,6 +8,7 @@ from kafka.admin import KafkaAdminClient, NewTopic
 import logging
 import time
 from json import dumps
+from uuid import uuid4
 from datetime import datetime
 logging.getLogger().setLevel(logging.INFO)
 
@@ -40,6 +42,7 @@ def setup_data_source():
                         names=clickstream_data_headers)
         
         total_clicks = df['n'].sum()
+
         click_probabilities = array(df["n"] / total_clicks)
         logging.info(f'Clickstream data source created succesfully.')
         return df, click_probabilities 
@@ -49,7 +52,7 @@ def setup_data_source():
 
 
 
-def stream_data(df, click_probabilities, seconds=10):
+def stream_data(df, click_probabilities, ids, seconds=10):
     
 
     producer = KafkaProducer(bootstrap_servers=[kafka_broker_url], max_block_ms=5000)
@@ -64,16 +67,19 @@ def stream_data(df, click_probabilities, seconds=10):
             click_dict = df.iloc[choice_idx].to_dict()
             del click_dict['n']
             
-            click_dict['id'] = i
-            
+            click_dict['id'] = uuid4()
+
+            user_id = choice(ids)
+            click_dict["user_id"] = user_id
             datetime_occured = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
             click_dict['click_time'] = datetime_occured
+            
             
             producer.send(kafka_topic_name, dumps(click_dict, default=str).encode('utf-8'))
 
             i += 1 
             
-            logging.info(f'Data sent to topic <{kafka_topic_name}> for Wikipedia Article Name: <{ click_dict["curr"] }>')
+            logging.info(f'Data sent to topic <{kafka_topic_name}> for Wikipedia Article Name: <{ click_dict["curr"] }>. Timestamp: {datetime_occured}')
         
         except Exception as e:
             logging.error(f'An error occured: {e}')
@@ -83,6 +89,7 @@ def stream_data(df, click_probabilities, seconds=10):
 
 
 if __name__ == "__main__":
+    ids = users_init()
     df, click_probabilities = setup_data_source()
     create_topic_in_kafka()
-    stream_data(df, click_probabilities)
+    stream_data(df, click_probabilities, ids)

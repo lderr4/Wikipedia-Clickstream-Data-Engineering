@@ -1,9 +1,10 @@
 CREATE TABLE kafka_clickstream_source (
-    `id` INT, 
+    `id` STRING, 
+    `user_id` STRING,
     `prev` STRING,
     `curr` STRING,
     `type` STRING,
-    `datetime_occured` TIMESTAMP(3),
+    `click_time` TIMESTAMP(3),
     `processing_time` AS PROCTIME()
 ) WITH (
     'connector' = '{{ connector }}',

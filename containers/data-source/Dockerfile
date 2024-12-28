@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN mkdir -p /app/data
 
+RUN mkdir -p /app/src
+
 COPY download_data.sh /app
 
 RUN chmod +x /app/download_data.sh

@@ -9,9 +9,10 @@ services:
     depends_on:
       broker:
         condition: service_healthy
+      postgres:
+        condition: service_healthy
     volumes:
-       - ./src/data-source/data_stream.py:/app/data_stream.py
-       - ./src/data-source/constants.py:/app/constants.py
+       - ./src/data-source/:/app/src/
     networks:
       - confluent
 
@@ -144,6 +145,13 @@ services:
       - ./src/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - confluent
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
 
 networks:
   confluent:
