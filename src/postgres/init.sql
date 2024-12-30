@@ -3,6 +3,7 @@ CREATE SCHEMA clickstream;
 SET
     search_path TO clickstream;
 
+DROP TABLE IF EXITS USERS;
 CREATE TABLE users (
     id VARCHAR PRIMARY KEY,
     first_name VARCHAR,
@@ -21,6 +22,7 @@ CREATE TABLE users (
     picture VARCHAR
 );
 
+DROP TABLE IF EXISTS clicks;
 CREATE TABLE clicks (
     click_id VARCHAR PRIMARY KEY,
     user_id VARCHAR,

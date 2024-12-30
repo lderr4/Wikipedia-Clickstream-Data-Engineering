@@ -1,3 +1,5 @@
-notebooks/
 **/__pycache__/
+.vscode
+src/postgres/data
+notebooks/.ipynb_checkpoints
 

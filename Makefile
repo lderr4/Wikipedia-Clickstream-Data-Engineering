@@ -17,17 +17,20 @@ up-stream-only:
 	docker-compose up -d zookeeper broker postgres data-source
 
 run-stream-only:
-	docker-compose exec data-source python /app/src/data_stream.py
+	docker-compose exec -d data-source python /app/src/data_stream.py
 
 make kafka-control-center:
 	docker compose up control-center -d
 
 make testenv:
-	make up-stream-only && make up-flink-job-only
-
-make ctest:
-	docker exec jobmanager ./bin/flink run --python ./code/postgres_connection.py
+	make up-stream-only && make up-flink-job-only && make run-stream-only && make run-clickstream-job
 
 run: 
 	down up run-clickstream-job
+
+count-rows: # command to confirm the db is working
+	docker-compose exec -T postgres psql -U postgres -d postgres -c "\
+	SELECT \
+	(SELECT COUNT(*) FROM clickstream.clicks) AS num_click, \
+	(SELECT COUNT(*) FROM clickstream.users) AS num_users;"
 
