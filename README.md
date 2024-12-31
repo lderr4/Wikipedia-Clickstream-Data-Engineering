@@ -17,9 +17,13 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
    ```
    make run
    ```
+   The UI should look like this:
+   ![flink ui screenshot](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/flinkui.png)
  
 5. To confirm the entire system is working correctly, check that the database is getting populated with data:
    ```
    make count-rows
    ```
+   The users table should have 5000 entries; the clicks table should be getting continually populated.
+   ![count rows command](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/countrows.png)
    
