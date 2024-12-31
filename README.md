@@ -30,7 +30,7 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
 
 
 ### Metabase Dashboard
-Additionally, I have created a Metabase dashboard which refreshes every minute, showing real-time analytics of the fake data stream. Unfortunately, Metabase dashboards aren't really compatible with github because they are saved as database volumes, so you would have to rebuild this. Regardless, I will share my screenshots here.
+Additionally, I have created a Metabase dashboard which refreshes every minute, showing real-time analytics of the fake data stream. Unfortunately, Metabase dashboards aren't compatible with github because they are saved as database volumes. Regardless, I will share my screenshots here.
 
 ![Aggregate dashboard](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/dashboard1.png)
 ![filter by country dashboard](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/dashboard2.png)
