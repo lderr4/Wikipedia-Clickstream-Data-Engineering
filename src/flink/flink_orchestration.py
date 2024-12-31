@@ -7,7 +7,6 @@ from dataclasses import asdict
 from typing import Tuple
 
 
-
 def get_sql_query(
     entity: str,
     type: str = 'source',
@@ -35,17 +34,15 @@ def get_sql_query(
 def run_clickstream_job(t_env: StreamTableEnvironment,get_sql_query=get_sql_query) -> None:
     # Create Source DDLs
     query = get_sql_query('kafka_connection', "source")
-    print(query)
+
     t_env.execute_sql(query)
 
     query = get_sql_query('postgres_connection', 'sink')
-    print(query)
-    t_env.execute_sql(query)
 
+    t_env.execute_sql(query)
     query = get_sql_query("clickstream", "process")    
-
-    print(query)
     t_env.execute_sql(query)
+    
 
 def get_execution_environment(
     config: StreamJobConfig,

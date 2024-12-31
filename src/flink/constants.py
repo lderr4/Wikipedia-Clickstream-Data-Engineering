@@ -10,7 +10,7 @@ REQUIRED_JARS = [
 
 @dataclass(frozen=True)
 class StreamJobConfig:
-    job_name: str = 'checkout-attribution-job'
+    job_name: str = 'clickstream-job'
     jars: List[str] = field(default_factory=lambda: REQUIRED_JARS)
     checkpoint_interval: int = 10
     checkpoint_pause: int = 5
