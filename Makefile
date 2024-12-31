@@ -34,3 +34,8 @@ count-rows: # command to confirm the db is working
 	(SELECT COUNT(*) FROM clickstream.clicks) AS num_click, \
 	(SELECT COUNT(*) FROM clickstream.users) AS num_users;"
 
+reset-db:
+	docker compose up -d postgres && \
+	docker exec -i postgres psql -U postgres -d postgres < ./src/postgres/init.sql
+
+

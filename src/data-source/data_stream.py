@@ -8,6 +8,7 @@ from kafka.admin import KafkaAdminClient, NewTopic
 import logging
 import time
 from json import dumps
+from random import uniform, randint
 from uuid import uuid4
 from datetime import datetime
 logging.getLogger().setLevel(logging.INFO)
@@ -44,6 +45,7 @@ def setup_data_source():
         total_clicks = df['n'].sum()
 
         click_probabilities = array(df["n"] / total_clicks)
+        df = df.drop('n', axis=1)
         logging.info(f'Clickstream data source created succesfully.')
         return df, click_probabilities 
     
@@ -52,34 +54,25 @@ def setup_data_source():
 
 
 
-def stream_data(df, click_probabilities, ids, seconds=10):
+def stream_data(df, click_probabilities, ids):
     
-
     producer = KafkaProducer(bootstrap_servers=[kafka_broker_url], max_block_ms=5000)
-    start = time.time()
-    i = 0
     while True:
-        time.sleep(1)
-        # if start + seconds < time.time():
-        #     break
+        time.sleep(uniform(0.1, 2))
         try:
-            choice_idx = choice(df.index, p=click_probabilities)
-            click_dict = df.iloc[choice_idx].to_dict()
-            del click_dict['n']
-            
-            click_dict['id'] = uuid4()
-
             user_id = choice(ids)
-            click_dict["user_id"] = user_id
-            datetime_occured = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-            click_dict['click_time'] = datetime_occured
+            user_session_clicks = randint(1,10)
+            for _ in range(user_session_clicks):
             
-            
-            producer.send(kafka_topic_name, dumps(click_dict, default=str).encode('utf-8'))
-
-            i += 1 
-            
-            logging.info(f'Data sent to topic <{kafka_topic_name}> for Wikipedia Article Name: <{ click_dict["curr"] }>. Timestamp: {datetime_occured}')
+                choice_idx = choice(df.index, p=click_probabilities)
+                click_dict = df.iloc[choice_idx].to_dict()
+                
+                click_dict['id'] = uuid4()
+                click_dict["user_id"] = user_id
+                datetime_occured = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+                click_dict['click_time'] = datetime_occured
+                producer.send(kafka_topic_name, dumps(click_dict, default=str).encode('utf-8'))
+                logging.info(f'Data sent to topic <{kafka_topic_name}> for Wikipedia Article Name: <{ click_dict["curr"] }>. Timestamp: {datetime_occured}')
         
         except Exception as e:
             logging.error(f'An error occured: {e}')
