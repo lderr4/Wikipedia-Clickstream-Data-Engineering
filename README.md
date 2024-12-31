@@ -24,6 +24,6 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
    ```
    make count-rows
    ```
-   The users table should have 5000 entries, the clicks table should be getting continually populated.
+   The users table should have 5000 entries; the clicks table should be getting continually populated.
    ![count rows command](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/countrows.png)
    
