@@ -1,6 +1,4 @@
-build:
-	mkdir -p src/postgres/data && \
-	docker compose up --build -d
+# Main Commands
 
 down:
 	docker compose down
@@ -20,7 +18,7 @@ make run:
 make metabase:
 	docker compose up -d metabase && open http://localhost:3000
 
-# Commands I made for Debugging 
+# Additional Commands
 
 up-flink-job-only:
 	docker compose up -d postgres jobmanager taskmanager
