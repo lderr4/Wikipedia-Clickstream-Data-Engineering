@@ -20,7 +20,7 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
    The UI should look like this:
    ![flink ui screenshot](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/flinkui.png)
  
-5. To confirm the entire system is working correctly, check that the database is getting populated with data:
+5. To confirm the entire system is working correctly, use this command to check the number of rows in the users and clicks tables:
    ```
    make count-rows
    ```
