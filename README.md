@@ -1,7 +1,7 @@
 # Wikipedia-Clickstream
 
 ### Overview
-In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikimedia.org/other/clickstream/) to simulate a real-time data stream. I use Apache Kafka for ingestion, Apache Flink for processing, PostgreSQL for data storage, Metabase for real-time analytics, and Docker-Compose for orchestration. I downloaded the Dutch version of the dataset because the file size is much smaller, although any version should work. Additionally, I used [Random User API](https://randomuser.me/) to generate fake user data, enriching clickstream dataset with realistic user information.
+In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikimedia.org/other/clickstream/) to simulate a real-time data stream. I use Apache Kafka for ingestion, Apache Flink for processing, PostgreSQL for data storage, Metabase for real-time analytics, and Docker-Compose for orchestration. Additionally, I used [Random User API](https://randomuser.me/) to generate fake user data, enriching clickstream dataset with realistic user information.
 
 ### How to Run Locally
 1. Make sure you have [Docker](https://docs.docker.com/engine/install/) installed on your device.
