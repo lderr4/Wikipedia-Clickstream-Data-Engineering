@@ -38,5 +38,16 @@ Additionally, I have created a Metabase dashboard which refreshes every minute, 
 
 ### Architecture Diagram
 ![Architecture Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/architecture.png)
-![Entity Relationship Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/erdiagram.png)
+- Python Data Source
+- Kafka Topic
+- Flink Processing
+- PostgreSQL Database
+- Metabase Dashboard
+
+
+<img src="https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/erdiagram.png" alt="Entity Relationship Diagram" width="300"/>
+
+
+
+
    
