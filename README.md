@@ -37,5 +37,6 @@ Additionally, I have created a Metabase dashboard which refreshes every minute, 
 
 
 ### Architecture Diagram
-
+![Architecture Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/architecture.png)
+![Entity Relationship Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/erdiagram.png)
    
