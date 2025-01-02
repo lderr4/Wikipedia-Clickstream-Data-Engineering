@@ -38,11 +38,12 @@ Additionally, I have created a Metabase dashboard which refreshes every minute, 
 
 ### Architecture Diagram
 ![Architecture Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/architecture.png)
-- Python Data Source
-- Kafka Topic
-- Flink Processing
-- PostgreSQL Database
-- Metabase Dashboard
+##### Python Data Source
+Simulate a data source by producing fake data and sending it to the kafka topic. This is done by emulating the probability distribution of clicks seen in the real world wikipedia clickstream dataset. 
+##### Kafka Topic
+##### Flink Processing
+##### PostgreSQL Database
+##### Metabase Dashboard
 
 
 <img src="https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/erdiagram.png" alt="Entity Relationship Diagram" width="300"/>
