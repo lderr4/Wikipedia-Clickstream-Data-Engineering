@@ -1,5 +1,6 @@
-clickstream_data_path = "app/data/clickstream-nlwiki-2024-10.tsv"
+clickstream_data_path = "data/clickstream-enwiki-2024-10.tsv"
 clickstream_data_headers = ['prev', 'curr', 'type', 'n']
+clickstream_sample_path = "app/src/data/clickstream-enwiki-2024-10_sample.csv"
 
 kafka_topic_name = "clickstream"
 kafka_broker_url = "broker:29092"

@@ -1,7 +1,8 @@
 from pandas import read_csv
-from constants import clickstream_data_path, clickstream_data_headers, kafka_topic_name, kafka_broker_url
+from constants import clickstream_sample_path, clickstream_data_headers, kafka_topic_name, kafka_broker_url
 from users_init import users_init
-from numpy import array
+import numpy
+from numpy import array, maximum, sum, minimum
 from numpy.random import choice
 from kafka import KafkaProducer
 from kafka.admin import KafkaAdminClient, NewTopic
@@ -12,6 +13,9 @@ from random import uniform, randint
 from uuid import uuid4
 from datetime import datetime
 logging.getLogger().setLevel(logging.INFO)
+
+
+
 
 def create_topic_in_kafka():
     try:
@@ -36,24 +40,27 @@ def create_topic_in_kafka():
 
 def setup_data_source():
     try:
-        df = read_csv(clickstream_data_path, 
-                        sep='\t',
-                        on_bad_lines='skip',
-                        header=None,
-                        names=clickstream_data_headers)
-        
+        df = read_csv(clickstream_sample_path)
+
         total_clicks = df['n'].sum()
 
         click_probabilities = array(df["n"] / total_clicks)
+
+        click_probabilities = clip_probs(click_probabilities)
+        
         df = df.drop('n', axis=1)
         logging.info(f'Clickstream data source created succesfully.')
         return df, click_probabilities 
     
     except Exception as e:
+        print(e)
         logging.error(f'Error setting up clickstream data source: {e}')
 
 
-
+def clip_probs(probs, min_prob=0.00001, max_prob=0.0001):
+    clipped_probs = maximum(probs, min_prob)
+    clipped_probs = minimum(probs, max_prob)
+    return clipped_probs / sum(clipped_probs)
 def stream_data(df, click_probabilities, ids):
     
     producer = KafkaProducer(bootstrap_servers=[kafka_broker_url], max_block_ms=5000)

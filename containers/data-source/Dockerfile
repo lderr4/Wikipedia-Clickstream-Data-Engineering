@@ -10,14 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-RUN mkdir -p /app/data
-
 RUN mkdir -p /app/src
 
-COPY download_data.sh /app
 
-RUN chmod +x /app/download_data.sh
-
-CMD /app/download_data.sh && tail -f /dev/null
+CMD tail -f /dev/null
 
 
