@@ -34,7 +34,7 @@ run-clickstream-job:
 	docker exec jobmanager ./bin/flink run --python ./code/flink_orchestration.py
 
 up-stream-only:
-	mkdir -p src/postgres/data && docker-compose up -d zookeeper broker postgres data-source
+	mkdir -p src/postgres/data && docker-compose up -d zookeeper broker data-source
 
 run-stream-only:
 	docker-compose exec -d data-source python /app/src/data_stream.py
@@ -46,5 +46,5 @@ count-rows:
 	(SELECT COUNT(*) FROM clickstream.users) AS num_users;"
 
 reset-db:
-	docker compose up -d postgres && \
+	docker compose up -d postgres \
 	docker exec -i postgres psql -U postgres -d postgres < ./src/postgres/init.sql
