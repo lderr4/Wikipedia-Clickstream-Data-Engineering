@@ -36,11 +36,11 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
 Simulate a data source by producing fake click data and sending it to the kafka topic. The data is taken from the Wikipedia Clickstream data dump and simulates realistic click probabilities. Additionally, the fake user API is used to generate a fake user table with 5000 rows. Each click is given a random user from the user table.
 ##### Apache Kafka
 Apache Kafka serves as a message broker with its log-based queueing system, capable of handling high throughput data streams. The clicks data is sent to the clicks topic.
-##### Flink Processing
+##### Apache Flink
 Apache Flink is responsible for processing the data sent to the Kafka topic and inserting into the PostgreSQL database. A Kafka source and a JDBC PostgreSQL sink are set up with their respective Jar connectors, allowing Flink to interact with the Kafka topic and the PostgreSQL database simulatneously. Much like Apache Spark, Apache Flink runs with a distributed architecture utilizing Job Manager (Master) and Task Manager (Worker) nodes. In this project, I use two Task Manager slots, allowing for parallel processing of the incoming clickstream data.
 
 ##### PostgreSQL Database
-My PostgreSQL setup utilizes the following schema: 
+My PostgreSQL setup utilizes the following schema.
 
 <img src="https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/erdiagram.png" alt="Entity Relationship Diagram" width="300"/>
 
