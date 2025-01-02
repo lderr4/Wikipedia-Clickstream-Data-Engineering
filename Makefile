@@ -14,9 +14,9 @@ run:
 	make download-data && \
 	make down && \
 	make up-stream-only && \
+	make reset-db && \
 	make up-flink-job-only && \
 	make sleep && \
-	make reset-db && \
 	make run-stream-only && \
 	make run-clickstream-job && \
 	open http://localhost:8081
