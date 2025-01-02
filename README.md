@@ -28,7 +28,7 @@ In this project, I use the [Wikipedia Clickstream Data Dump](https://dumps.wikim
    ![count rows command](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/countrows.png)
 6. Optionally, you can run this command to start up metabase.
    ```
-   make metabase
+   make Metabase
    ```
 ### Architecture Diagram
 ![Architecture Diagram](https://github.com/lderr4/Wikipedia-Clickstream-Data-Engineering/blob/main/assets/images/architecture.png)
