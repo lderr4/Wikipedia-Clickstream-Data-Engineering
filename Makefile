@@ -13,8 +13,8 @@ download-data:
 run:
 	make download-data && \
 	make down && \
-	make up-stream-only && \
 	make reset-db && \
+	make up-stream-only && \
 	make up-flink-job-only && \
 	make sleep && \
 	make run-stream-only && \
